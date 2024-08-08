@@ -1,0 +1,52 @@
+
+
+1. Create a Google Cloud Storage Bucket:
+   - Go to the Google Cloud Console.
+   - Navigate to the Storage section.
+   - Click on "Create bucket."
+   - Enter a unique name for your bucket.
+   - Select your storage class and location.
+   - Click "Create" to create the bucket.
+
+2. Upload the File to the Bucket:
+   - In the Google Cloud Console, go to the Storage section.
+   - Open the bucket you created.
+   - Click on "Upload files."
+   - Upload the file from your local machine.
+
+3. Copy the `gsutil` URL:
+   - After the file is uploaded, find it in the bucket.
+   - Click on the file to open its details.
+   - Copy the `gsutil` URL (e.g., `gs://your-bucket-name/file-name`).
+
+4. Download the File to the VM:
+   - Open your VM instance in Google Cloud Console or connect via SSH.
+   - Run the following command to download the file to the current working directory:
+  
+     gsutil cp gs://your-bucket-name/file-name ./
+     
+
+5.Access the File from the VM:
+   - Once the file is downloaded, you can access it in the current working directory on your VM.
+
+
+OR FOR PICKLE FILE :
+
+	fs = gcsfs.GCSFileSystem()
+	with fs.open(model_path, 'rb') as model_file:
+    		loaded_model = pickle.load(model_file)
+
+	model_path = 'gs://BUCKET-NAME/FILE-NAME'
+
+	with fs.open(model_path, 'wb') as model_file:
+    		pickle.dump(gridrfr, model_file)
+
+OR TO ACCESS FILE DIRECT FROM CLOUD STORAGE WITHOUT DOWNLOADING :
+
+
+	fs = gcsfs.GCSFileSystem()
+	with fs.open(gcs_path) as f:
+    		data = pd.read_csv(f)
+
+
+TO CONNECT VM TO CLOUD NEED TO EDIT VM ACCESS TO ALLOW ALL CLOUD APIS

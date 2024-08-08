@@ -1,0 +1,57 @@
+
+python -m venv myenv
+myenv\Scripts\activate
+pip install -r requirements.txt
+
+
+IN GCP
+whoami to get a username
+
+IN SYS TERMINAL
+
+gcloud init 
+gcloud auth login      
+gcloud compute scp filename username@instance_name:/home/username
+[gcloud compute scp main.py shrutisuresh2507@instance-20240803-145021:/home/shrutisuresh2507]
+same for requirements file 
+
+IN GCP
+instal pip3 -> sudo apt install python3-pip
+check if installed  -> python3 -m pip --version
+install venv  ->sudo apt install python3-venv
+make venv -> python3 -m venv myenv
+	  -> source myenv/bin/activate
+download dependencies ->pip install -r requirements.txt
+
+for stop words: open python file  -> python    
+				     import nltk
+				     nltk.download('stopwords')
+				     exit() [to leave Python file]
+ 
+
+run python file -> python main.py
+
+
+# connecting to storage 
+import gcsfs
+
+fOR FOR PICKLE FILE :
+
+	fs = gcsfs.GCSFileSystem()
+	with fs.open(model_path, 'rb') as model_file:
+    		loaded_model = pickle.load(model_file)
+
+	model_path = 'gs://BUCKET-NAME/FILE-NAME'
+
+	with fs.open(model_path, 'wb') as model_file:
+    		pickle.dump(gridrfr, model_file)
+
+fOR TO ACCESS FILE DIRECT FROM CLOUD STORAGE WITHOUT DOWNLOADING :
+
+
+	fs = gcsfs.GCSFileSystem()
+	with fs.open(gcs_path) as f:
+    		data = pd.read_csv(f)
+
+
+TO CONNECT VM TO CLOUD NEED TO EDIT VM ACCESS TO ALLOW ALL CLOUD APIS
